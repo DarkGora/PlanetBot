@@ -6,10 +6,20 @@ public class Main {
 
             System.out.println("Hello world__2");
 
+//123
+            System.out.println("Main.main");
+            //btytetsygtf
+
+
             //btytetsygtf_-_gul
+
             //dfdsfds
             //jo[oh[]]lj'j'j'j''kl'kl'jkl'kl'kl'kl'kl'kl''
+=======
 
+
+            //dfdsfds
+            //;kj;klkj
         }
     }
 }
