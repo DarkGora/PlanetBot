@@ -6,7 +6,13 @@ public class Main {
 
             System.out.println("Hello world__2");
 
+//123
+            System.out.println("Main.main");
+            //btytetsygtf
+
+
             //btytetsygtf_-_gul
+
             //dfdsfds
             //;kj;klkj
         }
