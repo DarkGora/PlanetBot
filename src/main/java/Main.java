@@ -9,8 +9,8 @@ public class Main {
 //123
             System.out.println("Main.main");
             //btytetsygtf
-
-
+//Это когда то было написанно кем-то.
+            //Смысловой нагрузки не несёт.
             //btytetsygtf_-_gul
 
             //dfdsfds
