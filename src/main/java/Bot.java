@@ -17,24 +17,25 @@ import java.util.List;
 
 
 public class Bot extends TelegramLongPollingBot {
-    public static final String USER_NAME = "";
-    public static final String TOKEN = "";
+    public static final String USER_NAME = "DarkGora";
+    public static final String TOKEN = "SPUTNIC";
     public Map<Long, Student> heroes = new HashMap<>();
     public List<Question> listQuestion = new ArrayList<>();
 
     public static final long GROUP_ID = -1002474189401l;
 
     public Bot() {
-        listQuestion.add(new Question("", List.of(""), 2));
-        listQuestion.add(new Question("", List.of(""), 1));
-        listQuestion.add(new Question("", List.of(""), 0));
-        listQuestion.add(new Question("", List.of(""), 0));
-        listQuestion.add(new Question("", List.of(""), 0));
-        listQuestion.add(new Question("", List.of(""), 2));
-        listQuestion.add(new Question("", List.of(""), 2));
-        listQuestion.add(new Question("", List.of(""), 0));
-        listQuestion.add(new Question("", List.of(""), 0));
-        listQuestion.add(new Question("", List.of(""), 3));
+        listQuestion.add(new Question("Как изначально назывался язык java", List.of("Oak", "Tree", "Brich", "Pine"), 0));
+        listQuestion.add(new Question("Кто создал Джаву", List.of("Гоплинг", "Гослинг", "Готлинг", "Годлинг"), 1));
+        listQuestion.add(new Question("Сколько байт памяти занимает тип переменных", List.of("2", "4", "8", "16"), 2));
+        listQuestion.add(new Question("Два важных ключевых слова, используемых в циклах", List.of("Break и Contine", "Break и Add", "Break и loop", "loop и Add"), 0));
+        listQuestion.add(new Question("Какие данные возвращает метод  main()", List.of("String", "Int", "Не может возвращать данные", "Указанные в скобках"), 2));
+        listQuestion.add(new Question("Сколько методов у класса  Object", List.of("8", "9", "11", "12"), 2));
+        listQuestion.add(new Question("Выберите несуществующий метод Object", List.of("String toString()", "Object clone()", "int hashCode()", "void patify()"), 3));
+        listQuestion.add(new Question("Какие элементы может содержать класс", List.of("Поля", "Конструкоры", "Методы", "Интерфейсы", "Все вышеперечислонные"), 4));
+        listQuestion.add(new Question("Что означает этот метасимвол регулярных выражений -$ ", List.of("Начало строки", "Конец строки", "Начало слова", "Конец ввода"), 1));
+        listQuestion.add(new Question("Что озн  ачает этот метасимвол регулярных выражений -\s ", List.of("Цифровой символ", "Не цифровой символ", "символ пробела", "бкувенно-цифровой символ", "Все вышеперечислонные"), 2));
+
     }
 
     @Override
