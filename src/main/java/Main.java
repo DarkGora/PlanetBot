@@ -1,25 +1,36 @@
+import org.telegram.telegrambots.bots.DefaultBotOptions;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
 public class Main {
-    public static void main(String args[]) {
-        System.out.println("Hello world");
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
+    public static final String PROXY_HOST = "84.247.168.26";
+    public static final int PROXY_PORT = 40245;
 
-            System.out.println("Hello world__2");
-
-//123
-            System.out.println("Main.main");
-            //btytetsygtf
+    public static void main(String[] args) throws TelegramApiException {
+        DefaultBotOptions botOptions = new DefaultBotOptions();
+        botOptions.setProxyHost(PROXY_HOST);
+        botOptions.setProxyPort(PROXY_PORT);
+        botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS4);
 
 
-            //btytetsygtf_-_gul
 
             //dfdsfds
             //jo[oh[]]lj'j'j'j''kl'kl'jkl'kl'kl'kl'kl'kl''
-=======
+
 
 
             //dfdsfds
             //;kj;klkj
+
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+        Bot bot = new Bot();
+        try {
+            telegramBotsApi.registerBot(bot);
+        }catch (TelegramApiRequestException e){
+            e.printStackTrace();
+
         }
     }
 }
