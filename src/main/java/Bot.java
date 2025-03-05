@@ -46,6 +46,7 @@ public class Bot extends TelegramLongPollingBot {
         listQuestion.add(new Question ("Какой оператор используется для создания нового объекта в Java?",List.of("new","object","ineselert","int"),1));
         listQuestion.add(new Question ("Какой из следующих методов позволяет получить длину массива в Java?",List.of("length()","size()","getlength()","length"),0));    }
 
+
     @Override
     public String getBotUsername() {
         return USER_NAME;
