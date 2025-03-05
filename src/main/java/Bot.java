@@ -94,7 +94,6 @@ public class Bot extends TelegramLongPollingBot {
                         sendPhoto(chatId, "C:\\Users\\andre\\IdeaProjects\\Java\\bad-or-good-word-on-question-mark-background-E3KKBT.jpg", "");
                     }
 
-
                     student.addAnswer(callbackData);
                     student.vetynumber();
 
