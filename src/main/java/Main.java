@@ -14,16 +14,6 @@ public class Main {
         botOptions.setProxyPort(PROXY_PORT);
         botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS4);
 
-
-
-            //dfdsfds
-            //jo[oh[]]lj'j'j'j''kl'kl'jkl'kl'kl'kl'kl'kl''
-
-
-
-            //dfdsfds
-            //;kj;klkj
-
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         Bot bot = new Bot();
         try {

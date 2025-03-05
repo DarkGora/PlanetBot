@@ -17,8 +17,8 @@ import java.util.List;
 
 
 public class Bot extends TelegramLongPollingBot {
-    public static final String USER_NAME = "DarkGora";
-    public static final String TOKEN = "SPUTNIC";
+    public static final String USER_NAME = "Gora321_bot";
+    public static final String TOKEN = "7753540504:AAF6PE6BC8WlrrsIQUHOpO30zcLmqAovII8";
     public Map<Long, Student> heroes = new HashMap<>();
     public List<Question> listQuestion = new ArrayList<>();
 
@@ -59,12 +59,17 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            Long chartId = update.getMessage().getChatId();
+            Long chatId = update.getMessage().getChatId();
             Message message = update.getMessage();
-            if (!heroes.containsKey(chartId)) {
-                sendMassage(chartId, "Привет! Ну что поехали ");
-                heroes.put(chartId, new Student(message.getFrom().getId(), message.getFrom().getFirstName()));
-                sendQuestion(chartId, 0);
+            if (!heroes.containsKey(chatId)) {
+                sendMassage(chatId, "Привет! Ну что поехали ");
+                Student student = new Student(message.getFrom().getId(), message.getFrom().getFirstName());
+                for (Question question : listQuestion) {
+                    student.addQuestion(question);
+                }
+                student.shuffleQuestions();
+                heroes.put(chatId, student);
+                sendQuestion(chatId, 0);
             }
 
         } else if (update.hasCallbackQuery()) {
@@ -76,13 +81,14 @@ public class Bot extends TelegramLongPollingBot {
 
                 if ("restart".equals(callbackData)) {
                     student.reset();
+                    student.shuffleQuestions();
                     sendMassage(chatId, "Тест начинается заново!");
                     sendQuestion(chatId, 0);
                     return;
                 }
                 if ("next_question".equals(callbackData)) {
                     int nextQuestionIndex = student.getNumber();
-                    if (nextQuestionIndex < listQuestion.size()) {
+                    if (nextQuestionIndex < student.getShuffledQuestions().size()) {
                         sendQuestion(chatId, nextQuestionIndex);
                     } else {
                         sendMassage(chatId, "Все вопросы закончились!");
@@ -91,8 +97,9 @@ public class Bot extends TelegramLongPollingBot {
                 }
 
                 int questionIndex = student.getNumber();
-                if (questionIndex < listQuestion.size()) {
-                    Question question = listQuestion.get(questionIndex);
+                List<Question> shuffledQuestions = student.getShuffledQuestions();
+                if (questionIndex < shuffledQuestions.size()){
+                    Question question = shuffledQuestions.get(questionIndex);
                     if (callbackData.equals(question.getAnswer().get(question.getIndex()))) {
                         student.veryGoodQuestion();
                         sendMassage(chatId, "Ответ верный! " + student.getGoodQuestion() + " правильных ответов.");
@@ -101,10 +108,10 @@ public class Bot extends TelegramLongPollingBot {
                     }
 
                     student.addAnswer(callbackData);
-                    student.vetynumber();
+                    student.nextQuestion();
 
 
-                    if (student.getNumber() == listQuestion.size()) {
+                    if (student.getNumber() == shuffledQuestions.size()) {
                         sendMassage(chatId, "Тест завершен!");
                         String finalResult = student.getFinalResult();
                         sendMessageWithRetryButton(chatId, finalResult);
@@ -119,11 +126,15 @@ public class Bot extends TelegramLongPollingBot {
 
 
     private void sendQuestion(Long chatId, int questionIndex) {
-        if (questionIndex < listQuestion.size()) {
-            Question question = listQuestion.get(questionIndex);
-            sendMassage(chatId, question.getName(), question.getAnswer());
-        } else {
-            sendMassage(chatId, "Все вопросы закончились.");
+        Student student = heroes.get(chatId);
+        if (student != null) {
+            List<Question> shuffledQuestions = student.getShuffledQuestions();
+            if (questionIndex < shuffledQuestions.size()) {
+                Question question = shuffledQuestions.get(questionIndex);
+                sendMassage(chatId, question.getName(), question.getAnswer());
+            } else {
+                sendMassage(chatId, "Все вопросы закончились.");
+            }
         }
     }
     private void sendNextQuestionButton(Long chatId) {
