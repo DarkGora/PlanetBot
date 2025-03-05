@@ -82,6 +82,9 @@ public class Student {
     public void shuffleQuestions() {
         shuffledQuestions = new ArrayList<>(questions);
         Collections.shuffle(shuffledQuestions);
+        if (shuffledQuestions.size() > 5) {
+            shuffledQuestions = shuffledQuestions.subList(0, 5);
+        }
     }
 
     public Student(Long id, String firstName) {
