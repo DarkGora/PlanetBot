@@ -15,8 +15,6 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Bot extends TelegramLongPollingBot {
     public static final String USER_NAME = "User";
     public static final String TOKEN = "Token";
