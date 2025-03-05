@@ -107,6 +107,7 @@ public class Bot extends TelegramLongPollingBot {
                         sendMassage(chatId, "Ответ неверный. У вас все еще " + student.getGoodQuestion() + " правильных ответов.");
                     }
 
+
                     student.addAnswer(callbackData);
                     student.nextQuestion();
 
