@@ -18,8 +18,8 @@ import java.util.List;
 
 
 public class Bot extends TelegramLongPollingBot {
-    public static final String USER_NAME = "Gora321_bot";
-    public static final String TOKEN = "7753540504:AAF6PE6BC8WlrrsIQUHOpO30zcLmqAovII8";
+    public static final String USER_NAME = "User";
+    public static final String TOKEN = "Token";
     public Map<Long, Student> heroes = new HashMap<>();
     public List<Question> listQuestion = new ArrayList<>();
 
