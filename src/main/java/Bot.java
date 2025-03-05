@@ -96,10 +96,8 @@ public class Bot extends TelegramLongPollingBot {
                     if (callbackData.equals(question.getAnswer().get(question.getIndex()))) {
                         student.veryGoodQuestion();
                         sendMassage(chatId, "Ответ верный! " + student.getGoodQuestion() + " правильных ответов.");
-                        sendPhoto(chatId, "C:\\Users\\andre\\IdeaProjects\\Java\\Good_Question.jpg", "");
                     } else {
                         sendMassage(chatId, "Ответ неверный. У вас все еще " + student.getGoodQuestion() + " правильных ответов.");
-                        sendPhoto(chatId, "C:\\Users\\andre\\IdeaProjects\\Java\\bad-or-good-word-on-question-mark-background-E3KKBT.jpg", "");
                     }
 
                     student.addAnswer(callbackData);
