@@ -43,7 +43,13 @@ public class Bot extends TelegramLongPollingBot {
         listQuestion.add(new Question ("Что такое исключение в Java?",List.of("Ошибка компиляции","Исключение обьекта путем команд","Doms","Где?"),3));
         listQuestion.add(new Question ("Какой из следующих классов является частью Java Collections Framework?",List.of("HashMap","Scanner","Framework","Collection"),1));
         listQuestion.add(new Question ("Какой оператор используется для создания нового объекта в Java?",List.of("new","object","ineselert","int"),1));
-        listQuestion.add(new Question ("Какой из следующих методов позволяет получить длину массива в Java?",List.of("length()","size()","getlength()","length"),0));    }
+        listQuestion.add(new Question ("Какой из следующих методов позволяет получить длину массива в Java?",List.of("length()","size()","getlength()","length"),0));
+        listQuestion.add(new Question("В каком году основали язык java?", List.of("1995","1990","1997","2000"),0));
+        listQuestion.add(new Question("Назовите фамилию разработчика языка java?", List.of("Паскаль","Эйх","Гослинг","Россум"),2));
+        listQuestion.add(new Question("Кто был первым программистом?", List.of("Ari","Ada","Кэй","Эйх"),1));
+        listQuestion.add(new Question("Как называется виртуальная машина, которая позволяет компьютеру запускать программы?", List.of("JVM","JDK","JRE","JIT"),0));
+        listQuestion.add(new Question("Первоначальное название языка java?", List.of("Oak","Delphi","Php","Perl"),0));
+    }
 
     @Override
     public String getBotUsername() {
