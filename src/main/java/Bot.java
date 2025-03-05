@@ -66,14 +66,32 @@ public class Bot extends TelegramLongPollingBot {
             if (heroes.containsKey(chatId)) {
                 Student student = heroes.get(chatId);
 
+                if ("restart".equals(callbackData)) {
+                    student.reset();
+                    sendMassage(chatId, "Тест начинается заново!");
+                    sendQuestion(chatId, 0);
+                    return;
+                }
+                if ("next_question".equals(callbackData)) {
+                    int nextQuestionIndex = student.getNumber();
+                    if (nextQuestionIndex < listQuestion.size()) {
+                        sendQuestion(chatId, nextQuestionIndex);
+                    } else {
+                        sendMassage(chatId, "Все вопросы закончились!");
+                    }
+                    return;
+                }
+
                 int questionIndex = student.getNumber();
                 if (questionIndex < listQuestion.size()) {
                     Question question = listQuestion.get(questionIndex);
                     if (callbackData.equals(question.getAnswer().get(question.getIndex()))) {
                         student.veryGoodQuestion();
                         sendMassage(chatId, "Ответ верный! " + student.getGoodQuestion() + " правильных ответов.");
+                        sendPhoto(chatId, "C:\\Users\\andre\\IdeaProjects\\Java\\Good_Question.jpg", "");
                     } else {
                         sendMassage(chatId, "Ответ неверный. У вас все еще " + student.getGoodQuestion() + " правильных ответов.");
+                        sendPhoto(chatId, "C:\\Users\\andre\\IdeaProjects\\Java\\bad-or-good-word-on-question-mark-background-E3KKBT.jpg", "");
                     }
 
 
@@ -83,7 +101,11 @@ public class Bot extends TelegramLongPollingBot {
 
                     if (student.getNumber() == listQuestion.size()) {
                         sendMassage(chatId, "Тест завершен!");
+                        String finalResult = student.getFinalResult();
+                        sendMessageWithRetryButton(chatId, finalResult);
                         sendMassage(GROUP_ID, student.getFirstName() + " завершил тест с " + student.getGoodQuestion() + " правильными ответами.");
+                    } else {
+                        sendNextQuestionButton(chatId);
                     }
                 }
             }
@@ -99,6 +121,68 @@ public class Bot extends TelegramLongPollingBot {
             sendMassage(chatId, "Все вопросы закончились.");
         }
     }
+    private void sendNextQuestionButton(Long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId.toString());
+        message.setText("Нажмите кнопку, чтобы перейти к следующему вопросу:");
+
+        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> row = new ArrayList<>();
+
+        InlineKeyboardButton nextButton = new InlineKeyboardButton();
+        nextButton.setText("Следующий вопрос");
+        nextButton.setCallbackData("next_question");
+        row.add(nextButton);
+
+        rowsInLine.add(row);
+        keyboardMarkup.setKeyboard(rowsInLine);
+        message.setReplyMarkup(keyboardMarkup);
+
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+    private void sendMessageWithRetryButton(Long chatId, String text) {
+        SendMessage reply = new SendMessage();
+        reply.setChatId(chatId.toString());
+        reply.setText(text);
+
+        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> row = new ArrayList<>();
+
+        InlineKeyboardButton retryButton = new InlineKeyboardButton();
+        retryButton.setText("Заново!!");
+        retryButton.setCallbackData("restart");
+        row.add(retryButton);
+
+        rowsInLine.add(row);
+        keyboardMarkup.setKeyboard(rowsInLine);
+        reply.setReplyMarkup(keyboardMarkup);
+
+        try {
+            execute(reply);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendPhoto(Long chartId, String fileName, String caption){
+        try {
+            SendPhoto sendPhoto = new SendPhoto();
+            sendPhoto.setChatId(chartId.toString());
+            sendPhoto.setPhoto(new InputFile( new FileInputStream(  fileName), fileName));
+            sendPhoto.setCaption(caption);
+            execute(sendPhoto);
+
+        } catch (FileNotFoundException | TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void sendMassage(Long chartId, String text) {
         SendMessage reply = new SendMessage();
         reply.setChatId(chartId.toString());
@@ -141,6 +225,3 @@ public class Bot extends TelegramLongPollingBot {
         return inlineKeyboardMarkup;
     }
 }
-
-
-
