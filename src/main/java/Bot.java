@@ -115,7 +115,7 @@ public class Bot extends TelegramLongPollingBot {
                         sendMassage(chatId, "Тест завершен!");
                         String finalResult = student.getFinalResult();
                         sendMessageWithRetryButton(chatId, finalResult);
-                        sendMassage(GROUP_ID, student.getFirstName() + " завершил тест с " + student.getGoodQuestion() + " правильными ответами.");
+                        sendMassage(GROUP_ID, student.getId()+ student.getFirstName() + " завершил тест с " + student.getGoodQuestion() + " правильными ответами.");
                     } else {
                         sendNextQuestionButton(chatId);
                     }
