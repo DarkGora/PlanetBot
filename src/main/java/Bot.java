@@ -17,8 +17,8 @@ import java.util.List;
 
 
 public class Bot extends TelegramLongPollingBot {
-    public static final String USER_NAME = "DarkGora";
-    public static final String TOKEN = "SPUTNIC";
+    public static final String USER_NAME = "ChartNewbot";
+    public static final String TOKEN = "7735646655:AAGOWK0hN_dNlpbPdzaEM4IIuvEFT1orC4U";
     public Map<Long, Student> heroes = new HashMap<>();
     public List<Question> listQuestion = new ArrayList<>();
 
@@ -84,6 +84,14 @@ public class Bot extends TelegramLongPollingBot {
                     if (student.getNumber() == listQuestion.size()) {
                         sendMassage(chatId, "Тест завершен!");
                         sendMassage(GROUP_ID, student.getFirstName() + " завершил тест с " + student.getGoodQuestion() + " правильными ответами.");
+                    }else{
+                        ///  sendMessage(GROUP_ID,
+                        //   listQuestion.get(student.getLastQuestion(random )).getNameQuestion(random),
+                        //  listQuestion.get(student.getLastQuestion(random )).getAnswers(random));
+                        //
+                        // Question question = listQuestion.get(questionIndex);
+                        sendMassage(chatId, question.getName(), question.getAnswer());
+
                     }
                 }
             }
