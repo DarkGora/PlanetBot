@@ -14,13 +14,13 @@ public class Main {
         botOptions.setProxyPort(PROXY_PORT);
         botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS4);
 
-
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         Bot bot = new Bot();
         try {
             telegramBotsApi.registerBot(bot);
         }catch (TelegramApiRequestException e){
             e.printStackTrace();
+
         }
     }
 }
