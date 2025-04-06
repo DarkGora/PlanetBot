@@ -43,4 +43,8 @@ class StudentTest {
         int expectedGoodQuestion = student.getGoodQuestion();
         assertEquals(expectedGoodQuestion, goodQuestion);
     }
+
+
+
+
 }
